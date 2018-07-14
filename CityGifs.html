@@ -1,0 +1,153 @@
+<html lang="en">
+
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=ed ge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  
+  <title>Giphy API</title>
+</head>
+
+
+
+
+<body>
+    
+    <div class= "buttonholder">
+
+    </div>
+    <div class = "spacer">             
+        <span>City:<input id="city-input" type="text"> </span> <input  id="submit" type="submit" value="Submit">
+    </div>
+    <div id = "gifholder">
+
+
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // Example queryURL for Giphy API
+    
+    var Topics = [ "Chicago","Philadelphia","New York","Miami","Los Angeles","Phoenix","Houston"  ];
+
+
+    
+    var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC&limit=" ;
+
+
+    $(document).ready(function(){
+        var Topics = [ "Chicago","Philadelphia","New York","Miami","Los Angeles","Phoenix","Houston"  ];
+
+
+          
+
+    
+
+
+    function giphReady() {        
+
+        for( i = 0; i < Topics.length;i++){
+             buttons = $("<button class= buttons>");
+             buttons.append(Topics[i]);  
+             buttons.text(Topics[i]); ;
+             buttons.attr("data-city",Topics[i]);
+             $(".buttonholder").append(buttons);
+
+
+
+
+        
+
+$(buttons).on("click", function() {
+    $("#gifholder").empty();
+    $(".buttonholder").empthy();
+      var city = $(this).attr("data-city");
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        city + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+        .then(function(response) {
+          var results = response.data;
+
+          for (var i = 0; i < results.length; i++) {
+            var gifDiv = $("<div class='item'>");
+
+            var rating = results[i].rating;
+
+            var p = $("<p>").text("Rating: " + rating);
+
+            var cityImage = $("<img>");
+            cityImage.attr("src", results[i].images.fixed_height.url);
+
+            gifDiv.prepend(p);
+            gifDiv.prepend(cityImage);
+
+            $("#gifholder").prepend(gifDiv);
+
+    
+
+
+
+
+
+          }
+         
+        });
+
+        
+    });
+
+    
+};
+
+};
+
+
+
+giphReady();
+        
+
+
+     
+
+
+        
+   
+    
+
+
+
+$("#submit").on("click", function(event) {
+            event.preventDefault();
+            $(".buttonholder").empty();
+            city = $("#city-input").val().trim();
+            Topics.push(city);
+            console.log(Topics);
+            $("#city-input").val('');
+            //updateButtons();
+            clearCity();
+            giphReady();
+            
+            
+
+
+                
+                
+
+
+
+
+            
+            
+            
+
+            
+});
+
+function clearCity(){
+    city = ""
+    $("#city-imput").val('')
+}
