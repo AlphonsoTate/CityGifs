@@ -60,7 +60,7 @@
 
 $(buttons).on("click", function() {
     $("#gifholder").empty();
-    $(".buttonholder").empthy();
+    
       var city = $(this).attr("data-city");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         city + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -151,3 +151,16 @@ function clearCity(){
     city = ""
     $("#city-imput").val('')
 }
+
+
+   
+});
+
+
+  </script>
+
+
+
+</body>
+
+</html>
