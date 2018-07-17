@@ -80,48 +80,35 @@ $(buttons).on("click", function() {
             var p = $("<p>").text("Rating: " + rating);
 
             var cityImage = $("<img>");
-            //cityImage.attr('onclick', animate())
             cityImage.attr("src", results[i].images.fixed_height_still.url);
             cityImage.attr("data-state",'data-still');
             cityImage.attr("class",'gifs');
             gifDiv.prepend(p);
             gifDiv.prepend(cityImage);
             $("#gifholder").prepend(gifDiv);
-
-               // function animate(){ 
-              //  cityImage.attr("src", results[i].images.fixed_height.url);
-                
-          //  };
-          $(".gifs").on("click", function() {
-               cityImage.attr("src", results[i].images.fixed_height.url)
-  
-
-          });
-          $(".gifs").on("click","click", function() {
-              cityImage.attr("src",results[i].images.fixed_height_still.url)
-
-              
-  
-
-            });
-             
+            }
 
             
 
-    
-
-
-
-
-
-          }
-         
-        });
-
         
     });
+   
 
     
+});
+
+ $(".gifs").on("click", function() {
+              
+              data_animate = cityImage.attr("data-animate",results[i].images.fixed_height.url)
+              state = $(this).attr("data-state");
+             if(state === "data-still") {
+                 $(this).attr("src", $(this).attr("data-animate"));
+                 $(this).attr("data-state", "animate");
+             };
+     
+        
+       });
+
 };
 
 };
@@ -129,13 +116,16 @@ $(buttons).on("click", function() {
 
 
 giphReady();
-        
 
-        $(".gifs").on("click", function() {
-               cityImage.attr("src", results[i].images.fixed_height.url)
+
+
+
+
+
+      
   
 
-          });
+       
 
 
      
@@ -158,21 +148,7 @@ $("#submit").on("click", function(event) {
             clearCity();
             giphReady();
             
-            
-
-
-                
-                
-
-
-
-
-            
-            
-            
-
-            
-});
+    });
 
 function clearCity(){
     city = ""
